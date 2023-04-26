@@ -12,3 +12,40 @@ editor: visual
 ## Logo of the Breaking Bad TV Show
 
 ![](Breaking_Bad_logo.png){fig-alt="Breaking_Bad_logo" fig-align="center" width="80%" height="80%"}
+
+## Short descriptive statistics of Season 2
+
+```{r}
+#| echo = FALSE,
+#| message = FALSE,
+#| warning = FALSE
+# Load the lubridate package for working with dates
+library(lubridate)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+```{r}
+# Define the start date and end date
+start_date <- as.Date("2009-03-08") 
+end_date <- as.Date("2009-05-31")   
+
+# Generate a sequence of dates with one-week frequency
+dates <- seq(start_date, end_date, by = "1 week")
+viewers_of_2_season <- c(1.66, 1.6, 1.13, 1.29, 1.21,1.41, 1.20, 1.04, 1.27, 1.19, 1.29, 1.19, 1.5)
+summary(viewers_of_2_season * 1e6) %>% 
+  knitr::kable(caption = "Table of milions of viewers in Season 2") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, underline = TRUE) %>%
+  column_spec(1:2, background = "#F2F2F2")
+```
+
+```{r}
+dataframe <- tibble(Date = dates, Viewers_in_milions = viewers_of_2_season)
+dataframe %>% 
+  knitr::kable(caption = "Table of milions of viewers in Season 2") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, underline = TRUE) %>%
+  column_spec(1:2, background = "#F2F2F2")
+```
