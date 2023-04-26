@@ -34,11 +34,7 @@ end_date <- as.Date("2009-05-31")
 # Generate a sequence of dates with one-week frequency
 dates <- seq(start_date, end_date, by = "1 week")
 viewers_of_2_season <- c(1.66, 1.6, 1.13, 1.29, 1.21,1.41, 1.20, 1.04, 1.27, 1.19, 1.29, 1.19, 1.5)
-summary(viewers_of_2_season * 1e6) %>% 
-  knitr::kable(caption = "Table of milions of viewers in Season 2") %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
-  row_spec(0, bold = TRUE, underline = TRUE) %>%
-  column_spec(1:2, background = "#F2F2F2")
+summary(viewers_of_2_season * 1e6)
 ```
 
 ```{r}
@@ -48,4 +44,14 @@ dataframe %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
   row_spec(0, bold = TRUE, underline = TRUE) %>%
   column_spec(1:2, background = "#F2F2F2")
+```
+
+## Graph of viewers in Season 2 over time
+
+```{r}
+dataframe %>% 
+  ggplot(aes(x = dates, y = viewers_of_2_season)) + 
+  geom_line() +
+  xlab('Date') +
+  ylab('Viewers in MLN')
 ```
