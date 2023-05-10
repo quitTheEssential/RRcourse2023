@@ -1,7 +1,20 @@
 ---
 title: "Breaking Bad TV Show"
 author: "Robert Kowalczyk"
-format: html
+date: today
+theme: Vapor
+prefer-html: true
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    toc-expand: 3
+    toc-title: Contents
+    toc-location: right
+    smooth-scroll: true
+    number-sections: true
+    code-fold: true
+  docx: default
 editor: visual
 ---
 
@@ -26,6 +39,9 @@ library(knitr)
 library(kableExtra)
 ```
 
+::: panel-tabset
+## Table of descriptive stats
+
 ```{r}
 # Define the start date and end date
 start_date <- as.Date("2009-03-08") 
@@ -34,16 +50,23 @@ end_date <- as.Date("2009-05-31")
 # Generate a sequence of dates with one-week frequency
 dates <- seq(start_date, end_date, by = "1 week")
 viewers_of_2_season <- c(1.66, 1.6, 1.13, 1.29, 1.21,1.41, 1.20, 1.04, 1.27, 1.19, 1.29, 1.19, 1.5)
-summary(viewers_of_2_season * 1e6)
+viewers_of_2_season %>% as_tibble() %>% 
+  summarise(mean = mean(viewers_of_2_season),
+            min = min(viewers_of_2_season),
+            max = max(viewers_of_2_season),
+            median = median(viewers_of_2_season),
+            std = sd(viewers_of_2_season)) %>% 
+  kable(., format = "html", align = "c") %>%
+  kable_styling(full_width = FALSE, position = "center")
 ```
+
+## Table of viewers
 
 ```{r}
 dataframe <- tibble(Date = dates, Viewers_in_milions = viewers_of_2_season)
 dataframe %>% 
-  knitr::kable(caption = "Table of milions of viewers in Season 2") %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE) %>%
-  row_spec(0, bold = TRUE, underline = TRUE) %>%
-  column_spec(1:2, background = "#F2F2F2")
+  knitr::kable(format = "html", align = "c", caption = "Table of milions of viewers in Season 2") %>% 
+  kable_styling(full_width = FALSE, position = "center")
 ```
 
 ## Graph of viewers in Season 2 over time
@@ -55,3 +78,4 @@ dataframe %>%
   xlab('Date') +
   ylab('Viewers in MLN')
 ```
+:::
