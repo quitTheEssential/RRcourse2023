@@ -74,8 +74,13 @@ dataframe %>%
 ```{r}
 dataframe %>% 
   ggplot(aes(x = dates, y = viewers_of_2_season)) + 
-  geom_line() +
+  geom_line(color = rgb(50,251, 226, maxColorValue = 255), alpha = 0.7, size = 1) +
   xlab('Date') +
-  ylab('Viewers in MLN')
+  ylab('Viewers in MLN') +
+  theme_minimal() + 
+  theme(panel.background = element_rect(fill = '#17082e', color = 'purple'),
+        plot.background = element_rect(fill = "#17082e"),
+        axis.title.x = element_text(colour = "white"),
+        axis.title.y = element_text(colour = "white"))
 ```
 :::
