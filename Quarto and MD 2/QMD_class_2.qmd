@@ -8,7 +8,6 @@ execute:
   echo: fenced
 ---
 
-
 # Moving from different formats to Quarto
 
 ## Migrating from RMarkdown
@@ -21,15 +20,15 @@ Step 1) Run `knitr::convert_chunk_header(input = "RMD_class_1_cut.Rmd", output =
 
 Step 2) Edit the YAML options (in notepad, through R, etc.)
 
-| RMD                     | Quarto           |     
-|:----------              |:-----            |
-| output:                 | format:          |
-| output: html_document   | format: html     |
-| output: pdf_document    | format: pdf      |
-| output: word_document   | format: docx     |
-| output: xaringan        | format: revealjs |
-| output: ioslides        | format: ioslides |
-|: [Other](https://quarto.org/docs/faq/rmarkdown.html)   :|
+| RMD                                                     | Quarto           |
+|:-----------------------------------------------------|:-----------------|
+| output:                                                 | format:          |
+| output: html_document                                   | format: html     |
+| output: pdf_document                                    | format: pdf      |
+| output: word_document                                   | format: docx     |
+| output: xaringan                                        | format: revealjs |
+| output: ioslides                                        | format: ioslides |
+| : [Other](https://quarto.org/docs/faq/rmarkdown.html) : |                  |
 
 Done!
 
@@ -37,28 +36,29 @@ Done!
 
 Step 1) insert a YAML header in a *raw* block
 
-For example: 
+For example:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 title: "(R)Markdown"
 author: "Name"
 date: "4/20/2023"
 format: html
 </pre>
+```
 `---`
 
-Done! You don't even need to switch to *.qmd!
+Done! You don't even need to switch to \*.qmd!
 
 But if you want embedded code chunks, you should switch to .qmd.
 
-You can convert a \*.ipynb file to a \*.qmd file and *vice versa* with:
-`quarto convert notebook.ipynb` (to qmd)
-`quarto convert notebook.qmd` (to ipynb)
+You can convert a \*.ipynb file to a \*.qmd file and *vice versa* with: `quarto convert notebook.ipynb` (to qmd) `quarto convert notebook.qmd` (to ipynb)
 
 Or [use `Jupytext` to have both (synced)](https://jupytext.readthedocs.io/en/latest/).
 
----
+------------------------------------------------------------------------
 
 # To add a (refreshable) preview
 
@@ -66,13 +66,13 @@ From terminal run:
 
 `quarto preview file.qmd`
 
-or 
+or
 
 `quarto preview notebook.ipynb`
 
 (You can preview in pdf by adding `--to pdf`)
 
----
+------------------------------------------------------------------------
 
 # Need a recap?
 
@@ -80,21 +80,21 @@ Remember you can [check the documentation](https://quarto.org/docs/authoring/mar
 
 For example, let's check here for some more info on [figures](https://quarto.org/docs/authoring/figures.html) or [diagrams](https://quarto.org/docs/authoring/diagrams.html) or other [neat tricks](https://quarto.org/docs/authoring/notebook-embed.html).
 
----
+------------------------------------------------------------------------
 
 # So what is YAML?
 
-**[YAML](https://yaml.org/)** = **Y**AML **A**in't **M**arkup **L**anguage
+[**YAML**](https://yaml.org/) = **Y**AML **A**in't **M**arkup **L**anguage
 
 As Wikipedia puts it: "a human-readable data-serialization language".
 
 If that's not clear, ChatGPT makes it clearer:
 
-1) a way to represent computer data in a format that is easily understood by humans, allowing for easier interpretation and modification of data without needing specialized software or tools 
+1)  a way to represent computer data in a format that is easily understood by humans, allowing for easier interpretation and modification of data without needing specialized software or tools
 
-2) these languages are commonly used in web development, data exchange between different systems, and configuration files for applications.
+2)  these languages are commonly used in web development, data exchange between different systems, and configuration files for applications.
 
----
+------------------------------------------------------------------------
 
 # YAML in Quarto - options
 
@@ -105,15 +105,20 @@ If that's not clear, ChatGPT makes it clearer:
 YAML requires indentation for options and suboptions (accordingly with the hierarchy). Examples:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 title: "My document"
 format: html
 </pre>
+```
 `---`
 
 Now with html-specific options:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 title: "My document"
 format: 
@@ -122,15 +127,14 @@ format:
     toc-depth: 2
 number-sections: true
 </pre>
+```
 `---`
 
 ### Banners
 
-You can highlight the title with a banner:
-`title-block-banner: true`
+You can highlight the title with a banner: `title-block-banner: true`
 
-or include an image for a background:
-`title-block-banner: images/banner.jpeg`
+or include an image for a background: `title-block-banner: images/banner.jpeg`
 
 ### Dates
 
@@ -147,6 +151,8 @@ Within the `execute` key you can set default options for code blocks. They can b
 Example:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 execute:
   echo: fenced
@@ -154,6 +160,7 @@ execute:
   cache: true 
   freeze: true
 </pre>
+```
 `---`
 
 `freeze` specifies a more general approach for caching when rendering a bunch of files or a whole project. `true` to not recompute generated computational output during a whole project render. `false` to always recompute (default). `auto` to recompute when a source file changed.
@@ -173,6 +180,8 @@ To get an html final output, code in .qmd gets evaluated and the output is saved
 ### Table of Contents
 
 `---`
+
+```{=html}
 <pre class="code-block">
 title: "My document"
 format: 
@@ -183,6 +192,7 @@ format:
     toc-title: Contents
     toc-location: body
 </pre>
+```
 `---`
 
 `toc-depth` describes the levels included (default 3).
@@ -199,7 +209,7 @@ format:
 
 `number-sections: true`
 
-`number-depth: 3`  Number of levels for numbering.
+`number-depth: 3` Number of levels for numbering.
 
 ### Global code-chunk options
 
@@ -211,6 +221,7 @@ format:
 
 E.g.:
 
+```{=html}
 <pre class="code-block">
 include-in-header:
   - text: |
@@ -219,17 +230,18 @@ include-in-header:
   - comments.html
 include-before-body: header.html
 </pre>
-
+```
 ### Styling
 
 You can use css for styling:
 
+```{=html}
 <pre class="code-block">
 format:
   html: 
     css: styles.css
 </pre>
-
+```
 ### Themes
 
 You can do a quick swap of the whole theme by using one of 25 themes from [Bootswatch](https://bootswatch.com/). Try:
@@ -242,19 +254,20 @@ You can do a quick swap of the whole theme by using one of 25 themes from [Boots
 
 You can also provide a dark and light option:
 
+```{=html}
 <pre class="code-block">
 theme:
   light: flatly
   dark: darkly
 </pre>
-
+```
 ### Some others (not all)
 
 Disable the default special features with:
 
 `minimal: true`
 
-###  Divs and Spans
+### Divs and Spans
 
 You can use classes and define 'div' regions (as in html nodes), by indicating the start and end of a region with `:::`.
 
@@ -262,6 +275,7 @@ For example:
 
 ### Putting your stuff in tabs
 
+```{=html}
 <pre class="code-block">
 ::: {.panel-tabset}
 
@@ -272,15 +286,12 @@ Text with headers
 Some more text
 :::
 </pre>
-
+```
 For example:
-
 
 # Lists
 
-::: {.panel-tabset}
-
-
+::: panel-tabset
 ## Ordered
 
 `1. Item 1`
@@ -316,28 +327,30 @@ For example:
 1.  Item 1
     -   Item 2
     -   Item 3
-    
 :::
 
 ### Creating a self-contained Html
 
 `---`
+
+```{=html}
 <pre class="code-block">
 format:
   html:
     embed-resources: true
 </pre>
+```
 `---`
 
 ## PDF options
 
 Many of the options for the pdf and docx formats look the same. Main differences:
 
-1) no dynamic elements (e.g. no floating table of content)
+1)  no dynamic elements (e.g. no floating table of content)
 
-2) no direct html support
+2)  no direct html support
 
-3) TeX support (e.g. you can use document classes, etc.)
+3)  TeX support (e.g. you can use document classes, etc.)
 
 ### Troubleshooting
 
@@ -356,6 +369,8 @@ this will force Quarto to use what you have installed in the system instead of t
 Instead of html files and code, you may attach .tex files and TeX writing:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 format:
   pdf:
@@ -366,6 +381,7 @@ format:
       - file: packages.tex
       - macros.tex 
 </pre>
+```
 `---`
 
 ### Lists of tables and figures
@@ -381,22 +397,28 @@ You can also render several formats and link them together.
 For example:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 format: 
   html: default
   docx: default
 </pre>
+```
 `---`
 
 Or if the file extensions overlap:
 
 `---`
+
+```{=html}
 <pre class="code-block">
 format: 
   html: default
   revealjs: 
     output-file: document-revealjs.html
 </pre>
+```
 `---`
 
 ## Getting an .md file
@@ -413,12 +435,12 @@ Try it for the `QMD_class_1_cut.qmd` file and compare QMD with MD.
 
 # Exporting YAML
 
-We’ve been editing YAML before. We can actually put the info from YAML in a separate file that will be automatically considered for all qmd documents.
+We've been editing YAML before. We can actually put the info from YAML in a separate file that will be automatically considered for all qmd documents.
 
 It's helpful when:
 
-- there's several documents that we want to have similar settings.
-- we work with a team and want everyone to use the same settings.
+-   there's several documents that we want to have similar settings.
+-   we work with a team and want everyone to use the same settings.
 
 We have several options here:
 
@@ -440,7 +462,7 @@ You can render Quarto MD files from your scripts or terminal. To do so, use:
 
 ## Terminal
 
-For a whole project: 
+For a whole project:
 
 `quarto render` in current folder or `quarto render myproject` for the `myproject` project.
 
@@ -454,8 +476,7 @@ For a folder:
 
 ## From the level of R
 
-`library(quarto)`
-`quarto_render()`
+`library(quarto)` `quarto_render()`
 
 You can specify options for the rendering, including:
 
@@ -467,12 +488,12 @@ Parameters will let you specify data inputs at the document's conception.
 
 Get your TV show description file from the previous week. Modify it using what we've learned today:
 
-1) Render it into at least two different formats in an automated way (e.g. using YAML options or a script).
+1)  Render it into at least two different formats in an automated way (e.g. using YAML options or a script).
 
-2) Add some features for the .html output, e.g.: add a table of contents and change the theme.
+2)  Add some features for the .html output, e.g.: add a table of contents and change the theme.
 
-3) Include tabs.
+3)  Include tabs.
 
-4) Browse through the documentation and pick additional configuration options on your own.
+4)  Browse through the documentation and pick additional configuration options on your own.
 
 Note: if you didn't finish the assignment last week, you can work with the Assignment.Rmd file. You'll have to convert it to .qmd first though (use what we've learned today for that!)
